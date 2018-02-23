@@ -32,8 +32,8 @@ def request_employee(id):
 def request_directory():
 	request_url = bamboo_base_url + 'directory'
 	r = requests.get(request_url, headers=bamboo_headers)
-	directory = json.loads(r.text)
-	directory_ids = []
-	for employee in directory['employees']:
-		directory_ids.append(employee['id'])
+	response = json.loads(r.text)
+	directory = []
+	for employee in response['employees']:
+		directory.append({'id': employee['id'], 'email':employee['workEmail']})
 	return directory_ids
